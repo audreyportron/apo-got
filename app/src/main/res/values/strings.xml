@@ -7,5 +7,11 @@
     <string name="error_message">We couldn\'t load the information. Please come back in a bit !</string>
     <string name="ok">See you soon</string>
 
+    <string name="soon">Coming Soon !!</string>
+    <string name="soon_message">You can\'t get those information yet.</string>
+
+
+    <string name="book_pages">%1$s pages</string>
+
 
 </resources>

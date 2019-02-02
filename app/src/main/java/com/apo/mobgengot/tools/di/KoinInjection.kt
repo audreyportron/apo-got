@@ -9,6 +9,7 @@ import com.apo.mobgengot.data.roomdb.GotDatabase
 import com.apo.mobgengot.domain.book.BookRepository
 import com.apo.mobgengot.domain.categories.CategoriesRepository
 import com.apo.mobgengot.domain.categories.CategoriesService
+import com.apo.mobgengot.ui.book.BooksViewModel
 import com.apo.mobgengot.ui.categories.CategoriesViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
     viewModel<CategoriesViewModel> { CategoriesViewModel(get(), getProperty(CategoriesViewModel.LISTENER_ID)) }
+    viewModel<BooksViewModel> { BooksViewModel(get(), getProperty(BooksViewModel.URL_ID)) }
 }
 val repositoryModule = module {
     single<CategoriesRepository> { MainCategoriesRepository(get(), get()) }
@@ -48,7 +50,7 @@ fun createOkHttpClient(): OkHttpClient {
 
 
 fun createRetrofit(okHttp: OkHttpClient): Retrofit = Retrofit.Builder()
-    .baseUrl("https://android.mobgen.com/test/api1/")
+    .baseUrl("https://android.mobgen.com/")
     .client(okHttp)
     .addConverterFactory(
         GsonConverterFactory.create(GsonBuilder().create())

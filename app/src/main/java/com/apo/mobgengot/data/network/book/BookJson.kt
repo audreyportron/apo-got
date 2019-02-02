@@ -11,7 +11,7 @@ data class BookJson(
 )
 
 fun BookJson.toBook(): Book = Book(
-   authors = authors,
+    authors = authors,
     country = country,
     name = name,
     pages = pages

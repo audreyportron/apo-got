@@ -4,4 +4,6 @@
     <dimen name="margin_default">16dp</dimen>
 
     <dimen name="categories_card_height">96dp</dimen>
+
+    <dimen name="book_card_height">224dp</dimen>
 </resources>
