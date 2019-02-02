@@ -3,11 +3,11 @@ package com.apo.mobgengot.ui
 import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.apo.mobgengot.MainActivity
 import com.apo.mobgengot.R
 import com.apo.mobgengot.domain.CategoriesRepository
 import com.apo.mobgengot.domain.Category
 import com.apo.mobgengot.tools.AppSchedulers
+import com.apo.mobgengot.ui.categories.HomeActivity
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import org.koin.android.ext.android.inject
@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun onSuccess(categories: List<Category>) {
-        startActivity(MainActivity.getIntent(this))
+        startActivity(HomeActivity.getIntent(this))
         finish()
     }
 

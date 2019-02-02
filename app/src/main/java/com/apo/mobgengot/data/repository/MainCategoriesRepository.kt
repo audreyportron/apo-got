@@ -14,9 +14,13 @@ class MainCategoriesRepository(
     private val categoriesDao: CategoriesDAO
 ) : CategoriesRepository {
     override fun getCategories(forceApiLoad: Boolean): Single<List<Category>> {
-        val categories: List<Category>? = if (forceApiLoad) null else categoriesDao.getAll()?.map { it.toCategory() }
 
-        return if (categories != null) Single.just(categories)
+        val categories =
+            if (forceApiLoad) null
+            else categoriesDao.getAll().map { categoriesEntity -> categoriesEntity.map { it.toCategory() } }
+                .onErrorReturn { null }
+
+        return if (categories != null) categories
         else categoriesApi.getCategories().map { categoriesJson ->
             categoriesJson.map { categoryJson ->
                 categoryJson.toCategory()
@@ -24,11 +28,14 @@ class MainCategoriesRepository(
         }.doOnSuccess {
             val categoryEntities = it.map { category -> category.toCategoryEntity() }
             categoriesDao.insertAll(categoryEntities)
-        }.onErrorResumeNext {
-            categoriesDao.getAll()?.let { entities ->
-                Single.just(entities.map {
-                    it.toCategory()
-                }) ?: Single.error(it)
+        }.onErrorResumeNext { t ->
+            //Try to get datas from db
+            categoriesDao.getAll().map {
+                it.let { entities ->
+                    entities.map { entity ->
+                        entity.toCategory()
+                    }
+                }
             }
         }
     }

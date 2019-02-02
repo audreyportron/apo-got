@@ -6,16 +6,20 @@ import com.apo.mobgengot.data.repository.MainCategoriesRepository
 import com.apo.mobgengot.data.roomdb.GotDatabase
 import com.apo.mobgengot.domain.CategoriesRepository
 import com.apo.mobgengot.domain.CategoriesService
+import com.apo.mobgengot.ui.categories.CategoriesViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
+val viewModelModule = module {
+    viewModel<CategoriesViewModel> { CategoriesViewModel(get(), getProperty(CategoriesViewModel.LISTENER_ID)) }
+}
 val repositoryModule = module {
     single<CategoriesRepository> { MainCategoriesRepository(get(), get()) }
 }
