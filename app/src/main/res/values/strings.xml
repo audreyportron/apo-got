@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MobGen GOT</string>
+
+    <string name="error">We got a problem!!</string>
+    <string name="error_message">We couldn\'t load the information. Please come back in a bit !</string>
+    <string name="ok">See you soon</string>
+
+
 </resources>
