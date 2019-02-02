@@ -17,9 +17,26 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 autobind="@{model.categoriesViewModel}"
+                visible="@{!model.error}"
         >
         </androidx.recyclerview.widget.RecyclerView>
-
-
+        <TextView
+                visible="@{model.error}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/error_message"
+        />
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                style="@style/AppTheme.Progress.Horizontal"
+                visible="@{model.loading}"
+                android:indeterminate="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

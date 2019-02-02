@@ -68,6 +68,8 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$room_version"
     implementation "androidx.room:room-rxjava2:2.1.0-alpha04"
 
+    //ProgressBar
+    implementation "me.zhanghai.android.materialprogressbar:library:1.4.1"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.google.truth:truth:0.33'
