@@ -1,14 +1,10 @@
-package com.apo.mobgengot.data.roomdb
+package com.apo.mobgengot.data.network.categories
 
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.domain.categories.toCategoryType
 
-fun Category.toCategoryEntity(): CategoryEntity = CategoryEntity(
-    id = id,
-    title = title, apiLink = apiLink
-)
 
-fun CategoryEntity.toCategory(): Category =
+fun CategoryJson.toCategory(): Category =
     Category(
         id = id,
         title = title,

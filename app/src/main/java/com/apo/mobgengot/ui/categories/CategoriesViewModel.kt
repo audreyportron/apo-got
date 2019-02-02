@@ -6,8 +6,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
-import com.apo.mobgengot.domain.CategoriesService
-import com.apo.mobgengot.domain.Category
+import com.apo.mobgengot.domain.categories.CategoriesService
+import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.tools.AppSchedulers
 import com.apo.mobgengot.ui.binding.AutobindedViewModel
 import io.reactivex.disposables.CompositeDisposable

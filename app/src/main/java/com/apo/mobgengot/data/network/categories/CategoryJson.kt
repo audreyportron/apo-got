@@ -1,4 +1,4 @@
-package com.apo.mobgengot.data.network
+package com.apo.mobgengot.data.network.categories
 
 import com.google.gson.annotations.SerializedName
 

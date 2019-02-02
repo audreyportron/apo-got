@@ -1,4 +1,4 @@
-package com.apo.mobgengot.domain
+package com.apo.mobgengot.domain.categories
 
 data class Category(
     val id: Int,

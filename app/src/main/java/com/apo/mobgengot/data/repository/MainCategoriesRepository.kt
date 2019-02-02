@@ -1,12 +1,12 @@
 package com.apo.mobgengot.data.repository
 
-import com.apo.mobgengot.data.network.CategoriesApi
-import com.apo.mobgengot.data.network.toCategory
+import com.apo.mobgengot.data.network.categories.CategoriesApi
+import com.apo.mobgengot.data.network.categories.toCategory
 import com.apo.mobgengot.data.roomdb.CategoriesDAO
 import com.apo.mobgengot.data.roomdb.toCategory
 import com.apo.mobgengot.data.roomdb.toCategoryEntity
-import com.apo.mobgengot.domain.CategoriesRepository
-import com.apo.mobgengot.domain.Category
+import com.apo.mobgengot.domain.categories.CategoriesRepository
+import com.apo.mobgengot.domain.categories.Category
 import io.reactivex.Single
 
 class MainCategoriesRepository(

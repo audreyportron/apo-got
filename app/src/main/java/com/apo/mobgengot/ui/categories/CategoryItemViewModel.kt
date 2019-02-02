@@ -3,7 +3,7 @@ package com.apo.mobgengot.ui.categories
 import android.view.View
 import com.apo.mobgengot.BR
 import com.apo.mobgengot.R
-import com.apo.mobgengot.domain.Category
+import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.ui.binding.AutobindedViewModel
 
 class CategoryItemViewModel(
