@@ -52,7 +52,7 @@ class MainCategoriesRepositoryTest {
     @Test
     fun should_return_data_from_db_when_exist_and_force_load_false() {
         //Given
-        given(categoriesDao.getAll()).willReturn(listOf(categoryEntity))
+        given(categoriesDao.getAll()).willReturn(Single.just(listOf(categoryEntity)))
 
         //When
         val test = repository.getCategories(false).test()
@@ -73,7 +73,7 @@ class MainCategoriesRepositoryTest {
     fun should_return_data_from_db_when_network_call_fail_and_exist() {
         //Given
         given(categoriesApi.getCategories()).willReturn(Single.error(Throwable()))
-        given(categoriesDao.getAll()).willReturn(listOf(categoryEntity))
+        given(categoriesDao.getAll()).willReturn(Single.just(listOf(categoryEntity)))
 
         //When
         val test = repository.getCategories(true).test()
@@ -96,7 +96,7 @@ class MainCategoriesRepositoryTest {
     fun should_return_error_when_ws_fail_no_db_and_force_fail_true() {
         //Given
         given(categoriesApi.getCategories()).willReturn(Single.error(Throwable()))
-        given(categoriesDao.getAll()).willReturn(null)
+        given(categoriesDao.getAll()).willReturn(Single.error(Throwable()))
 
         //When
         val test = repository.getCategories(true).test()
@@ -110,8 +110,7 @@ class MainCategoriesRepositoryTest {
     @Test
     fun should_return_error_when_ws_fail_no_db_and_force_fail_false() {
         //Given
-        given(categoriesApi.getCategories()).willReturn(Single.error(Throwable()))
-        given(categoriesDao.getAll()).willReturn(null)
+        given(categoriesDao.getAll()).willReturn(Single.error(Throwable()))
 
         //When
         val test = repository.getCategories(false).test()

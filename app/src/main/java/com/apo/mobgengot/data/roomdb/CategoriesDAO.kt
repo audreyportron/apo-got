@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import io.reactivex.Single
 
 @Dao
 interface CategoriesDAO {
@@ -12,7 +13,7 @@ interface CategoriesDAO {
     fun insertAll(categories: List<CategoryEntity>)
 
     @Query("SELECT * FROM category")
-    fun getAll(): List<CategoryEntity>?
+    fun getAll(): Single<List<CategoryEntity>>
 
     @Delete
     fun deleteAll(categories: List<CategoryEntity>)

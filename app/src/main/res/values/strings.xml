@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">MobGen GOT</string>
+    <string name="app_name">Game of Thrones</string>
+    <string name="categories_activity">Select a category</string>
+
 
     <string name="error">We got a problem!!</string>
     <string name="error_message">We couldn\'t load the information. Please come back in a bit !</string>
