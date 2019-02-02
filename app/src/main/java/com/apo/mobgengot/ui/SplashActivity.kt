@@ -4,8 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.apo.mobgengot.R
-import com.apo.mobgengot.domain.CategoriesRepository
-import com.apo.mobgengot.domain.Category
+import com.apo.mobgengot.domain.categories.CategoriesRepository
+import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.tools.AppSchedulers
 import com.apo.mobgengot.ui.categories.HomeActivity
 import io.reactivex.disposables.CompositeDisposable

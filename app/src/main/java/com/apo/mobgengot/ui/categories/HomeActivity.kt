@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.apo.mobgengot.R
 import com.apo.mobgengot.databinding.HomeActivityBinding
-import com.apo.mobgengot.domain.Category
+import com.apo.mobgengot.domain.categories.Category
 import org.koin.android.ext.android.setProperty
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

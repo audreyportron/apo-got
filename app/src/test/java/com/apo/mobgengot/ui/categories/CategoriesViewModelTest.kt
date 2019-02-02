@@ -1,8 +1,8 @@
 package com.apo.mobgengot.ui.categories
 
-import com.apo.mobgengot.domain.CategoriesService
-import com.apo.mobgengot.domain.Category
-import com.apo.mobgengot.domain.CategoryType
+import com.apo.mobgengot.domain.categories.CategoriesService
+import com.apo.mobgengot.domain.categories.Category
+import com.apo.mobgengot.domain.categories.CategoryType
 import com.apo.mobgengot.tools.AppSchedulers
 import com.apo.mobgengot.tools.initForTests
 import io.reactivex.Single
@@ -37,7 +37,12 @@ class CategoriesViewModelTest {
     @Test
     fun should_get_categories_and_show_when_service_no_error() {
         //Given
-        val category = Category(id = 1, title = "title1", type = CategoryType.BOOKS, apiLink = "href1")
+        val category = Category(
+            id = 1,
+            title = "title1",
+            type = CategoryType.BOOKS,
+            apiLink = "href1"
+        )
         given(categoriesService.getCategoriesByName(true)).willReturn(Single.just(listOf(category)))
 
         //When

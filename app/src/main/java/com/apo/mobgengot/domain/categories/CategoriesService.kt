@@ -1,4 +1,4 @@
-package com.apo.mobgengot.domain
+package com.apo.mobgengot.domain.categories
 
 import io.reactivex.Single
 

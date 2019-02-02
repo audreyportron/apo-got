@@ -1,11 +1,11 @@
 package com.apo.mobgengot.data.repository
 
-import com.apo.mobgengot.data.network.CategoriesApi
-import com.apo.mobgengot.data.network.CategoryJson
+import com.apo.mobgengot.data.network.categories.CategoriesApi
+import com.apo.mobgengot.data.network.categories.CategoryJson
 import com.apo.mobgengot.data.roomdb.CategoriesDAO
 import com.apo.mobgengot.data.roomdb.CategoryEntity
-import com.apo.mobgengot.domain.Category
-import com.apo.mobgengot.domain.CategoryType
+import com.apo.mobgengot.domain.categories.Category
+import com.apo.mobgengot.domain.categories.CategoryType
 import io.reactivex.Single
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -124,7 +124,13 @@ class MainCategoriesRepositoryTest {
     /** **********************************
      *          Data mock
      *********************************** **/
-    val categoryJson = CategoryJson(id = 1, title = "title1", apiLink = "href1")
+    val categoryJson =
+        CategoryJson(id = 1, title = "title1", apiLink = "href1")
     val categoryEntity = CategoryEntity(id = 1, title = "title1", apiLink = "href1")
-    val category = Category(id = 1, title = "title1", type = CategoryType.BOOKS, apiLink = "href1")
+    val category = Category(
+        id = 1,
+        title = "title1",
+        type = CategoryType.BOOKS,
+        apiLink = "href1"
+    )
 }
