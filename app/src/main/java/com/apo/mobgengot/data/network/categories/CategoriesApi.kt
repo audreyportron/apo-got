@@ -4,6 +4,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 
 interface CategoriesApi {
-    @GET("index")
+    @GET("test/api1/index")
     fun getCategories(): Single<List<CategoryJson>>
 }
