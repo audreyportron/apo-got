@@ -46,6 +46,12 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel:1.1.2"
+    implementation "androidx.lifecycle:lifecycle-extensions:1.1.2"
+
+    //Paging
+    implementation "android.arch.paging:runtime:1.0.1"
+
+    //Material
     implementation 'com.google.android.material:material:1.0.0'
 
     //Koin
