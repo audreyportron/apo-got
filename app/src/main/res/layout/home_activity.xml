@@ -18,6 +18,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 autobind="@{model.categoriesViewModel}"
                 visible="@{!model.error}"
+                tools:listitem="@layout/home_category_item"
+
         >
         </androidx.recyclerview.widget.RecyclerView>
         <TextView

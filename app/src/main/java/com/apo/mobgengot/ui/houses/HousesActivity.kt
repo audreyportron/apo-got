@@ -2,8 +2,11 @@ package com.apo.mobgengot.ui.houses
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
@@ -26,8 +29,8 @@ class HousesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.houses_activity)
 
-        title = intent.extras[HousesActivity.EXTRA_TITLE] as String
-        val url = intent.extras[HousesActivity.EXTRA_URL]
+        title = intent.extras[EXTRA_TITLE] as String
+        val url = intent.extras[EXTRA_URL]
         setProperty(HousesViewModel.URL_ID, url)
         initAdapter()
     }
@@ -44,15 +47,26 @@ class HousesActivity : AppCompatActivity() {
             houseAdapter.submitList(it)
         })
 
+        houses_item_name.apply{
+            text = title
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                transitionName = intent.extras[EXTRA_TITLE_TRANSITION_NAME] as String
+            }
+        }
+
+
+
     }
 
     companion object {
         val EXTRA_URL = "EXTRA_URL"
         val EXTRA_TITLE = "EXTRA_TITLE"
-        fun getIntent(context: Context, url: String, title: String): Intent {
+        val EXTRA_TITLE_TRANSITION_NAME = "EXTRA_TITLE_TRANSITION_NAME"
+        fun getIntent(context: Context, url: String, title: String, sharedView: TextView): Intent {
             return Intent(context, HousesActivity::class.java).apply {
                 putExtra(EXTRA_URL, url)
                 putExtra(EXTRA_TITLE, title)
+                putExtra(EXTRA_TITLE_TRANSITION_NAME, ViewCompat.getTransitionName(sharedView))
             }
         }
     }

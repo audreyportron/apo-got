@@ -36,6 +36,11 @@ class HouseViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context).inflate(R.layout.house_item, parent, false)
 ) {
     fun bindTo(house: House?) {
-        itemView.house_item_name.text = house?.name
+        itemView.apply{
+            house_item_name.text = house?.name
+            house_item_region.text = house?.region
+            house_item_title.text = house?.title
+        }
+
     }
 }

@@ -18,6 +18,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 autobind="@{model.booksViewModel}"
                 visible="@{!model.error}"
+                tools:listitem="@layout/house_item"
+
         >
         </androidx.recyclerview.widget.RecyclerView>
         <TextView

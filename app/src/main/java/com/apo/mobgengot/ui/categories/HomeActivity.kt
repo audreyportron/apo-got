@@ -4,7 +4,11 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import com.apo.mobgengot.R
 import com.apo.mobgengot.databinding.HomeActivityBinding
@@ -37,18 +41,23 @@ class HomeActivity : AppCompatActivity(), CategoriesViewModel.Listener {
     /** **********************************
      *          Categories Listener
      *********************************** **/
-    override fun onItemClick(category: Category) {
+    override fun onItemClick(category: Category, sharedView: TextView) {
         when (category.type) {
             CategoryType.BOOKS -> startActivity(BooksActivity.getIntent(this, category.apiLink, category.title))
-            CategoryType.HOUSES -> startActivity(HousesActivity.getIntent(this, category.apiLink, category.title))
+            CategoryType.HOUSES -> {
+
+               val options:ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                   this,
+                   sharedView,
+                   ViewCompat.getTransitionName(sharedView)!! // "!!" added because minSDK is superieur at 21
+               )
+                startActivity(HousesActivity.getIntent(this, category.apiLink, category.title, sharedView ), options.toBundle())
+            }
             else -> {
                 AlertDialog.Builder(this)
                     .create().apply {
                         setTitle(R.string.soon)
                         setMessage(getString(R.string.soon_message))
-                        setButton(
-                            AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok)
-                        ) { dialog, which -> finish() }
 
                     }.show()
             }
