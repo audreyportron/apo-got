@@ -11,6 +11,7 @@ import com.apo.mobgengot.databinding.HomeActivityBinding
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.domain.categories.CategoryType
 import com.apo.mobgengot.ui.book.BooksActivity
+import com.apo.mobgengot.ui.houses.HousesActivity
 import org.koin.android.ext.android.setProperty
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,6 +40,7 @@ class HomeActivity : AppCompatActivity(), CategoriesViewModel.Listener {
     override fun onItemClick(category: Category) {
         when (category.type) {
             CategoryType.BOOKS -> startActivity(BooksActivity.getIntent(this, category.apiLink, category.title))
+            CategoryType.HOUSES -> startActivity(HousesActivity.getIntent(this, category.apiLink, category.title))
             else -> {
                 AlertDialog.Builder(this)
                     .create().apply {
