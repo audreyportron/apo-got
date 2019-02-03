@@ -1,5 +1,6 @@
 package com.apo.mobgengot.ui.categories
 
+import android.widget.TextView
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.Lifecycle
@@ -23,7 +24,7 @@ class CategoriesViewModel(
     }
 
     interface Listener {
-        fun onItemClick(category: Category)
+        fun onItemClick(category: Category, sharedView: TextView)
     }
 
     val categoriesViewModel = ObservableArrayList<AutobindedViewModel>()
@@ -65,8 +66,8 @@ class CategoriesViewModel(
         error.set(true)
     }
 
-    private fun onCategoryClick(category: Category) {
-        listener?.onItemClick(category)
+    private fun onCategoryClick(category: Category, sharedView: TextView) {
+        listener?.onItemClick(category, sharedView)
     }
 
 }
