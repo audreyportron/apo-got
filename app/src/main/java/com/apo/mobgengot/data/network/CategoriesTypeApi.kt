@@ -1,6 +1,7 @@
 package com.apo.mobgengot.data.network
 
 import com.apo.mobgengot.data.network.book.BookJson
+import com.apo.mobgengot.data.network.character.CharacterJson
 import com.apo.mobgengot.data.network.houses.HouseJson
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -18,4 +19,8 @@ interface CategoriesTypeApi {
         @Query("_page") page: Int,
         @Query("_limit") limit: Int
     ): Single<List<HouseJson>>
+
+    @GET("test{url}/")
+    fun getCharacters(@Path("url", encoded = true) url: String): Single<List<CharacterJson>>
+
 }
