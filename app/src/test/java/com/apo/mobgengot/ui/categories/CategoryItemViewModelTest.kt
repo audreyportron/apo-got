@@ -1,5 +1,6 @@
 package com.a
 
+import android.widget.TextView
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.domain.categories.CategoryType
 import com.apo.mobgengot.ui.categories.CategoryItemViewModel
@@ -18,9 +19,11 @@ class CategoryItemViewModelTest {
         )
 
         //When
-        val model = CategoryItemViewModel(category, {})
+        val model = CategoryItemViewModel(category, ::listener)
 
         //Then
         assertTrue(model.title == category.title)
     }
+
+    fun listener(cat:Category, text: TextView){}
 }

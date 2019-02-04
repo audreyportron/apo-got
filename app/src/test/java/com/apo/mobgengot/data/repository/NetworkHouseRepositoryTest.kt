@@ -20,7 +20,7 @@ class NetworkHouseRepositoryTest {
     }
 
     @Test
-    fun should_return_books() {
+    fun should_return_houses() {
         //Given
         BDDMockito.given(api.getHouses("any", 1, 5)).willReturn(Single.just(listOf(houseJson)))
         //When
