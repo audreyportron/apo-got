@@ -1,5 +1,6 @@
 package com.apo.mobgengot.ui.categories
 
+import android.widget.TextView
 import com.apo.mobgengot.domain.categories.CategoriesService
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.domain.categories.CategoryType
@@ -12,17 +13,22 @@ import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.mock
+import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class CategoriesViewModelTest {
 
-    val categoriesService: CategoriesService = mock(CategoriesService::class.java)
+    val categoriesService: CategoriesService = Mockito.mock(CategoriesService::class.java)
 
+    val listener = object : CategoriesViewModel.Listener {
+        override fun onItemClick(category: Category, sharedView: TextView) {
+        }
+
+    }
 
     private val categoriesViewModel: CategoriesViewModel by lazy {
-        CategoriesViewModel(categoriesService, null)
+        CategoriesViewModel(categoriesService, listener)
     }
 
     @Before
@@ -31,7 +37,7 @@ class CategoriesViewModelTest {
     }
 
     /**
-     * Test throw a nullPointerException on the service mock
+     * This test is ignore due to a nullpointerException on a scheduler call
      */
     @Ignore
     @Test
@@ -56,7 +62,7 @@ class CategoriesViewModelTest {
     }
 
     /**
-     * Test throw a nullPointerException on the service mock
+     * This test is ignore due to a nullpointerException on a scheduler call
      */
     @Ignore
     @Test
@@ -74,7 +80,7 @@ class CategoriesViewModelTest {
     }
 
     /**
-     * Test throw a nullPointerException on the service mock
+     * This test is ignore due to a nullpointerException on a scheduler call
      */
     @Ignore
     @Test
