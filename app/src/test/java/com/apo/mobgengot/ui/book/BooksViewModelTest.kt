@@ -1,5 +1,6 @@
 package com.apo.mobgengot.ui.book
 
+import com.apo.mobgengot.data.repository.NetworkBookRepository
 import com.apo.mobgengot.domain.book.Book
 import com.apo.mobgengot.domain.book.BookRepository
 import com.apo.mobgengot.tools.AppSchedulers
@@ -7,14 +8,17 @@ import com.apo.mobgengot.tools.initForTests
 import io.reactivex.Single
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.BDDMockito
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
+
+@RunWith(MockitoJUnitRunner::class)
 class BooksViewModelTest {
 
-    val bookRepository: BookRepository = Mockito.mock(BookRepository::class.java)
+    val bookRepository: BookRepository = Mockito.mock(NetworkBookRepository::class.java)
 
 
     private val viewModel: BooksViewModel by lazy {
@@ -29,7 +33,6 @@ class BooksViewModelTest {
     /**
      * Test throw a nullPointerException on the service mock
      */
-    @Ignore
     @Test
     fun should_get_books_and_show_when_service_no_error() {
         //Given
@@ -49,7 +52,7 @@ class BooksViewModelTest {
     /**
      * Test throw a nullPointerException on the service mock
      */
-    @Ignore
+
     @Test
     fun should_show_error_when_get_data_error() {
         //Given
@@ -67,9 +70,8 @@ class BooksViewModelTest {
     /**
      * Test throw a nullPointerException on the service mock
      */
-    @Ignore
     @Test
-    fun should_show_error_when_categories_empty() {
+    fun should_show_error_when_books_empty() {
         //Given
         BDDMockito.given(bookRepository.getBooks("any")).willReturn(Single.just(emptyList()))
 
