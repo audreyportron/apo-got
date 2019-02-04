@@ -12,5 +12,8 @@
 
     <string name="book_pages">%1$s pages</string>
 
+    <string name="character_empty_alias">%1$s</string>
+    <string name="character_with_alias">%1$s as %2$s</string>
+
 
 </resources>
