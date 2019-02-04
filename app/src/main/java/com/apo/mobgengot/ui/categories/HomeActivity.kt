@@ -1,10 +1,8 @@
 package com.apo.mobgengot.ui.categories
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -15,6 +13,7 @@ import com.apo.mobgengot.databinding.HomeActivityBinding
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.domain.categories.CategoryType
 import com.apo.mobgengot.ui.book.BooksActivity
+import com.apo.mobgengot.ui.characters.CharactersActivity
 import com.apo.mobgengot.ui.houses.HousesActivity
 import org.koin.android.ext.android.setProperty
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -46,21 +45,24 @@ class HomeActivity : AppCompatActivity(), CategoriesViewModel.Listener {
             CategoryType.BOOKS -> startActivity(BooksActivity.getIntent(this, category.apiLink, category.title))
             CategoryType.HOUSES -> {
 
-               val options:ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                   this,
-                   sharedView,
-                   ViewCompat.getTransitionName(sharedView)!! // "!!" added because minSDK is superieur at 21
-               )
-                startActivity(HousesActivity.getIntent(this, category.apiLink, category.title, sharedView ), options.toBundle())
+                val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this,
+                    sharedView,
+                    ViewCompat.getTransitionName(sharedView)!! // "!!" added because minSDK is superieur at 21
+                )
+                startActivity(
+                    HousesActivity.getIntent(this, category.apiLink, category.title, sharedView),
+                    options.toBundle()
+                )
             }
-            else -> {
-                AlertDialog.Builder(this)
-                    .create().apply {
-                        setTitle(R.string.soon)
-                        setMessage(getString(R.string.soon_message))
+            CategoryType.CHARACTERS -> startActivity(
+                CharactersActivity.getIntent(
+                    this,
+                    category.apiLink,
+                    category.title
+                )
+            )
 
-                    }.show()
-            }
         }
     }
 
