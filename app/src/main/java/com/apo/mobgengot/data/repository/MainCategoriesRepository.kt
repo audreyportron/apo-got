@@ -7,12 +7,21 @@ import com.apo.mobgengot.data.roomdb.toCategory
 import com.apo.mobgengot.data.roomdb.toCategoryEntity
 import com.apo.mobgengot.domain.categories.CategoriesRepository
 import com.apo.mobgengot.domain.categories.Category
+import com.apo.mobgengot.tools.di.CategoriesCoroutineApi
 import io.reactivex.Single
 
 class MainCategoriesRepository(
     private val categoriesApi: CategoriesApi,
+    private val categoriesCoroutineApi: CategoriesCoroutineApi,
     private val categoriesDao: CategoriesDAO
 ) : CategoriesRepository {
+    override suspend fun getCategoriesCoroutine(): List<Category> {
+        val result = categoriesCoroutineApi.getCategories().await()
+        return result.map{
+            it.toCategory()
+        }
+    }
+
     override fun getCategories(forceApiLoad: Boolean): Single<List<Category>> {
 
         val categories =
@@ -39,4 +48,6 @@ class MainCategoriesRepository(
             }
         }
     }
+
+
 }

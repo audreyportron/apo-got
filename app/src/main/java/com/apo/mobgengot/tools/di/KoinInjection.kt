@@ -18,6 +18,8 @@ import com.apo.mobgengot.ui.categories.CategoriesViewModel
 import com.apo.mobgengot.ui.characters.CharactersViewModel
 import com.apo.mobgengot.ui.houses.HousesViewModel
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -28,13 +30,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val viewModelModule = module {
-    viewModel<CategoriesViewModel> { CategoriesViewModel(get(), getProperty(CategoriesViewModel.LISTENER_ID)) }
+    viewModel<CategoriesViewModel> { CategoriesViewModel(get(), get(), getProperty(CategoriesViewModel.LISTENER_ID)) }
     viewModel<BooksViewModel> { BooksViewModel(get(), getProperty(BooksViewModel.URL_ID)) }
     viewModel<HousesViewModel> { HousesViewModel(get(), getProperty(HousesViewModel.URL_ID)) }
     viewModel<CharactersViewModel> { CharactersViewModel(get(), getProperty(CharactersViewModel.URL_ID)) }
 }
 val repositoryModule = module {
-    single<CategoriesRepository> { MainCategoriesRepository(get(), get()) }
+    single<CategoriesRepository> { MainCategoriesRepository(get(), get(), get()) }
     single<BookRepository> { NetworkBookRepository(get()) }
     single<HouseRepository> { NetworkHouseRepository(get()) }
     single<CharacterRepository> { NetworkCharacterRepository(get()) }
@@ -71,7 +73,18 @@ fun createRetrofit(okHttp: OkHttpClient): Retrofit = Retrofit.Builder()
 val networkModule = module {
     single { createRetrofit(createOkHttpClient()).create(CategoriesApi::class.java) }
     single { createRetrofit(createOkHttpClient()).create(CategoriesTypeApi::class.java) }
+    single { createRetrofitForCoroutines(createOkHttpClient()).create(CategoriesCoroutineApi::class.java) }
 }
+
+fun createRetrofitForCoroutines(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    .baseUrl("https://android.mobgen.com/")
+    .client(okHttpClient)
+    .addConverterFactory(
+        GsonConverterFactory.create(GsonBuilder().create())
+    )
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
+    .build()
+
 
 /** **********************************
  *          DB module

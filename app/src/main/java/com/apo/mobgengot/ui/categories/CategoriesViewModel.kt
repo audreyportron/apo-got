@@ -1,5 +1,6 @@
 package com.apo.mobgengot.ui.categories
 
+import android.view.KeyEvent
 import android.widget.TextView
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
@@ -7,15 +8,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
+import com.apo.mobgengot.domain.categories.CategoriesRepository
 import com.apo.mobgengot.domain.categories.CategoriesService
 import com.apo.mobgengot.domain.categories.Category
 import com.apo.mobgengot.tools.AppSchedulers
 import com.apo.mobgengot.ui.binding.AutobindedViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
+import kotlinx.coroutines.*
 
 class CategoriesViewModel(
     val service: CategoriesService,
+    val repository: CategoriesRepository,
     private val listener: Listener?
 ) : ViewModel(), LifecycleObserver {
 
@@ -34,17 +38,34 @@ class CategoriesViewModel(
     private val compositeDisposable = CompositeDisposable()
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun getData() {
-        compositeDisposable += service.getCategoriesByName(false)
-            .subscribeOn(AppSchedulers.io())
-            .observeOn(AppSchedulers.mainThread())
-            .doOnSubscribe { loading.set(true) }
-            .doFinally { loading.set(false) }
-            .subscribe(::onSuccess, ::onError)
+//        compositeDisposable += service.getCategoriesByName(false)
+//            .subscribeOn(AppSchedulers.io())
+//            .observeOn(AppSchedulers.mainThread())
+//            .doOnSubscribe { loading.set(true) }
+//            .doFinally { loading.set(false) }
+//            .subscribe(::onSuccess, ::onError)
+//
+
+        myJob = CoroutineScope(Dispatchers.IO).launch {
+            val result= repository.getCategoriesCoroutine()
+            withContext(Dispatchers.Default){
+                onSuccess(result)
+            }
+        }
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     fun clear() {
         compositeDisposable.clear()
+    }
+
+    private var myJob: Job? = null
+
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy(){
+        myJob?.cancel()
     }
 
     private fun onSuccess(categories: List<Category>) {
